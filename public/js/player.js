@@ -2,12 +2,12 @@
  * @version 0.0.1
  * @desc Player
  */
-class Player {
-    constructor(options) {
-        const videoElem = document.querySelector('video');
+export default class Player {
+    constructor() {
+        const video = document.querySelector('video');
 
-        if (videoElem) {
-            this.videoElem = videoElem;
+        if (video) {
+            this.video = video;
         } else {
             throw Error(`video element not in DOM`);
         }
@@ -16,25 +16,11 @@ class Player {
         this.initControls();
     }
 
-    // get state() {
-    //     return {
-    //         paused: this.videoElem.paused,
-    //         currentTime: this.videoElem.currentTime,
-    //         duration: Number.isNaN(this.videoElem.duration)
-    //             ? 0.1
-    //             : this.videoElem.duration,
-    //         volume: this.videoElem.volume,
-    //     };
-    // }
-
     initEvents() {
-        this.videoElem.addEventListener(
+        this.video.addEventListener(
             'volumechange',
             this.onVolumeChange.bind(this)
         );
-
-        // this.videoElem.addEventListener('playing', this.onPlaying.bind(this));
-        // this.videoElem.addEventListener('pause', this.onPause.bind(this));
     }
 
     initControls() {
@@ -111,70 +97,67 @@ class Player {
         }
     }
 
+    load(source) {
+        this.video.src = source;
+        this.video.load();
+    }
+
+    isVideoPlaying() {
+        return !!(
+            this.video.currentTime > 0 &&
+            !this.video.paused &&
+            !this.video.ended &&
+            this.video.readyState > 2
+        );
+    }
+
     play() {
-        this.videoElem.play();
+        if (this.video.src) {
+            this.video.play();
+        }
     }
 
     pause() {
-        this.videoElem.pause();
+        this.video.pause();
     }
 
     fastForward() {
-        if (this.videoElem.ended) {
+        if (this.video.ended || !this.video.src) {
             return;
         }
 
-        this.videoElem.currentTime = Math.min(
-            this.videoElem.currentTime + 10,
-            this.videoElem.duration
+        this.video.currentTime = Math.min(
+            this.video.currentTime + 10,
+            this.video.duration
         );
-
-        // this.update();
     }
 
     rewind() {
-        if (this.videoElem.ended) {
+        if (this.video.ended || !this.video.src) {
             return;
         }
 
-        this.videoElem.currentTime = Math.max(
-            this.videoElem.currentTime - 10,
-            0
-        );
-
-        // this.update();
+        this.video.currentTime = Math.max(this.video.currentTime - 10, 0);
     }
 
     mute() {
-        this.videoElem.muted = true;
+        this.video.muted = true;
     }
 
     unMute() {
-        this.videoElem.muted = false;
+        this.video.muted = false;
     }
 
     seek(newTime) {
-        if (this.videoElem.ended) {
+        if (this.video.ended || !this.video.src) {
             return;
         }
 
-        newTime = Math.min(newTime, this.videoElem.duration);
+        newTime = Math.min(newTime, this.video.duration);
         newTime = Math.max(newTime, 0);
 
-        this.videoElem.currentTime = newTime;
-
-        // this.update();
+        this.video.currentTime = newTime;
     }
-
-    // update() {
-    //     const { duration } = this.state();
-
-    //     this.duration.textContent = formatDuration(duration);
-    // }
-
-    // onPlaying(event) {}
-
-    // onPause(event) {}
 
     onSeekTimeChanged(event) {
         if (event.defaultPrevented) {
@@ -212,5 +195,3 @@ class Player {
         }
     }
 }
-
-export { Player };

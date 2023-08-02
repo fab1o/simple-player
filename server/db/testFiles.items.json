@@ -1,0 +1,25 @@
+[
+    {
+        "_id": {
+            "$oid": "64aecb7a70b9730e302781e2"
+        },
+        "streams": [
+            {
+                "title": "Bug Buck Bunny (HTTP)",
+                "url": "http://vpe-static.bamgrid.com/sample-files/take-home-exam/sample-mp4-file.mp4"
+            },
+            {
+                "title": "Bug Buck Bunny (HTTPS)",
+                "url": "https://vpe-static.bamgrid.com/sample-files/take-home-exam/sample-mp4-file.mp4"
+            },
+            {
+                "title": "Tears of Steel (HTTP)",
+                "url": "http://vpe-static.bamgrid.com/sample-files/take-home-exam/tears_of_steel_320p.m4v"
+            },
+            {
+                "title": "Tears of Steel (HTTPS)",
+                "url": "https://vpe-static.bamgrid.com/sample-files/take-home-exam/tears_of_steel_320p.m4v"
+            }
+        ]
+    }
+]

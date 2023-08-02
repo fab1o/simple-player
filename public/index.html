@@ -3,19 +3,15 @@
   <head>
     <title>Testing Video Playback</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://static-assets.bamgrid.com/product/disneyplus/favicons/favicon-32x32.3699f19f7fdff1a556c0953c12fb883f.png">
     <script src="js/main.js" type="module"></script>
   </head>
 
   <body>
     <div class="container">
-      <div>
+      <div id="videos">
         <h3 class='test-header'>Video Tests</h3>
-        <ul>
-          <li>Item <span><button class="load-test-button">Load Test</button></span></li>
-          <li>Item <span><button class="load-test-button">Load Test</button></span></li>
-          <li>Item <span><button class="load-test-button">Load Test</button></span></li>
-          <li>Item <span><button class="load-test-button">Load Test</button></span></li>
-        </ul>
+        <!-- videos go here -->
       </div>
       <div class='video-container'>
         <div class="video">
@@ -23,8 +19,6 @@
             id='video'
             width='500'
             height='400'
-            poster='img/big_buck_bunny.jpeg'
-            src='http://vpe-static.bamgrid.com/sample-files/take-home-exam/sample-mp4-file.mp4'
           />
         </div>
         <div id='controls' class='control-bar'>
@@ -79,7 +73,6 @@
                 version="1.1"
                 id='volume'
                 class='volume'
-                onclick='unmute()'
               >
                 <g id="surface1">
                 <path style=" stroke:none;fill-rule:nonzero;fill:#3cb371;fill-opacity:1;" d="M 4.46875 11.023438 L 0 11.023438 L 0 20.976562 L 4.46875 20.976562 L 12.914062 27.238281 C 12.914062 27.238281 14.464844 28.539062 14.464844 27.199219 C 14.464844 25.851562 14.464844 5.828125 14.464844 4.609375 C 14.464844 3.554688 13.101562 4.582031 13.101562 4.582031 Z M 4.46875 11.023438 "/>

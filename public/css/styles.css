@@ -61,6 +61,11 @@ button {
   border: none;
   height: 25px;
   border-radius: 4px;
+  cursor: pointer;
+}
+
+svg {
+  cursor: pointer;
 }
 
 button:visited {
