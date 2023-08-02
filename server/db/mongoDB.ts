@@ -8,10 +8,8 @@ import { DB, Data } from '.';
 export class MongoDB implements DB {
     client: MongoClient;
 
-    public constructor(config: { username: string; password: string }) {
-        const { username, password } = config;
-
-        const uri = `mongodb+srv://${username}:<${password}>@cluster0.jnjhbj6.mongodb.net`;
+    public constructor(username: string, password: string) {
+        const uri = `mongodb+srv://${username}:${password}@cluster0.jnjhbj6.mongodb.net`;
 
         console.log(`Setting up MongoDB: ${uri}`);
 
@@ -29,8 +27,8 @@ export class MongoDB implements DB {
             await this.client.connect();
 
             const data = await this.client
-                .db('admin')
-                .collection<Data>('testFiles')
+                .db('testFiles')
+                .collection<Data>('items')
                 .find({})
                 .toArray();
 
@@ -38,7 +36,7 @@ export class MongoDB implements DB {
 
             return data;
         } catch (ex) {
-            console.log(ex.message);
+            console.dir(ex, { depth: null });
         } finally {
             await this.client.close();
         }

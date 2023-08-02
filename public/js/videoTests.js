@@ -1,11 +1,15 @@
 export const LOAD_VIDEO_EVENT = 'LOAD_VIDEO_EVENT';
 
 export async function getAllVideos() {
-    const request = await window.fetch('http://127.0.0.1:3000/data');
+    try {
+        const request = await window.fetch('http://127.0.0.1:3000/data');
 
-    const data = await request.json();
+        const data = await request.json();
 
-    return data.reduce((acc, curr) => acc.concat(curr.streams), []);
+        return data.reduce((acc, curr) => acc.concat(curr.streams), []);
+    } catch (ex) {
+        console.log(ex.message);
+    }
 }
 
 export function renderVideos(videos) {

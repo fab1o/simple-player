@@ -4,7 +4,8 @@
     "description": "Simple HTML5 Player - Client & Server apps",
     "main": "index.js",
     "scripts": {
-        "start": "concurrently 'ts-node index.ts $npm_config_username $npm_config_password' 'npm run client'",
+        "server": "ts-node index.ts $npm_config_username $npm_config_password",
+        "start": "concurrently \"npm run server $npm_config_username $npm_config_password\" \"npm run client\"",
         "client": "npx --yes live-server --open=public"
     },
     "author": {

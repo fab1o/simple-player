@@ -1,19 +1,13 @@
-import { DB, LocalDB, MongoDB } from './db';
+import { DB } from './db';
 
-class Controller {
+export default class Controller {
     db: DB;
 
-    public constructor(config?: { username: string; password: string }) {
-        if (config?.username && config?.password) {
-            this.db = new MongoDB(config);
-        } else {
-            this.db = new LocalDB();
-        }
+    public constructor(db: DB) {
+        this.db = db;
     }
 
     public async getData() {
         return this.db.getData();
     }
 }
-
-export default Controller;

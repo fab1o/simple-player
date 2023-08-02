@@ -1,13 +1,19 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http';
 
-import Controller from './server/controller';
+import { DB, LocalDB, MongoDB } from './server/db';
 
-let port = 3000;
+import Controller from './server/controller';
 
 const username = process.env.npm_config_username;
 const password = process.env.npm_config_password;
 
-const controler = new Controller({ username, password });
+let db: DB;
+
+if (username && password) {
+    db = new MongoDB(username, password);
+} else {
+    db = new LocalDB();
+}
 
 const server = createServer(
     async (request: IncomingMessage, response: ServerResponse) => {
@@ -18,6 +24,8 @@ const server = createServer(
             console.log('\nGET: /data');
 
             try {
+                const controler = new Controller(db);
+
                 const data = await controler.getData();
 
                 response.writeHead(200, { 'Content-Type': 'application/json' });
@@ -35,10 +43,8 @@ const server = createServer(
     }
 );
 
-function listen() {
-    server.listen(port, () => {
-        console.log(`\nServer listening on port ${port}`);
-    });
-}
+const port = 3000;
 
-listen();
+server.listen(port, () => {
+    console.log(`\nServer listening on port ${port}`);
+});
