@@ -29,7 +29,3 @@ npm start --username=<username> --password=<password>
 
 Where `<username>` is your database username and `<password>` is your database password.
 
-## Support
-
-For any question, please contact fabio [dot] jsx [at] gmail [dot] com
-
